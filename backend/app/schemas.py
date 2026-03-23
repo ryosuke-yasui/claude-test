@@ -32,6 +32,7 @@ class UserBase(BaseModel):
     name: str = Field(min_length=2, max_length=100)
     age: int = Field(ge=0, le=150)
     sex: Sex
+    phone: str | None = Field(default=None, max_length=30, pattern=r"^\+?[\d\s\-().]{7,30}$")
 
 
 class UserCreate(UserBase):

@@ -18,6 +18,11 @@ export const userSchema = z.object({
   sex: z.enum(["male", "female", "other"], {
     message: "Please select a sex",
   }),
+  phone: z
+    .string()
+    .regex(/^\+?[\d\s\-().]{7,30}$/, "Invalid phone number format")
+    .optional()
+    .or(z.literal("")),
   addresses: z.array(addressSchema),
 });
 
