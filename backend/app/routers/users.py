@@ -22,7 +22,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=schemas.User, status_code=201)
 def create_user(body: schemas.UserCreate, db: Session = Depends(get_db)):
-    user = models.User(name=body.name, age=body.age, sex=body.sex)
+    user = models.User(name=body.name, age=body.age, sex=body.sex, phone=body.phone)
     for addr in body.addresses:
         user.addresses.append(models.Address(**addr.model_dump()))
     db.add(user)
@@ -39,6 +39,7 @@ def update_user(user_id: int, body: schemas.UserUpdate, db: Session = Depends(ge
     user.name = body.name
     user.age = body.age
     user.sex = body.sex
+    user.phone = body.phone
     for addr in list(user.addresses):
         db.delete(addr)
     user.addresses = [models.Address(**addr.model_dump()) for addr in body.addresses]
