@@ -10,7 +10,10 @@ RUN uv sync --no-dev
 COPY alembic.ini .
 COPY alembic/ alembic/
 COPY app/ app/
+COPY entrypoint.sh .
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"]
+RUN chmod +x entrypoint.sh
+
+CMD ["./entrypoint.sh"]
