@@ -22,6 +22,7 @@ class User(Base):
     name = Column(String(100), nullable=False)
     age = Column(Integer, nullable=False)
     sex = Column(Enum(Sex), nullable=False)
+    phone = Column(String(30))
     created_at = Column(
         DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),

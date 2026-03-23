@@ -15,6 +15,7 @@ export interface User {
   name: string;
   age: number;
   sex: Sex;
+  phone: string | null;
   created_at: string;
   addresses: Address[];
 }
@@ -25,5 +26,6 @@ export interface UserInput {
   name: string;
   age: number;
   sex: Sex;
+  phone: string | null;
   addresses: AddressInput[];
 }

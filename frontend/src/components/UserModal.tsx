@@ -43,6 +43,7 @@ export function UserModal({ user, onClose }: UserModalProps) {
         name: user.name,
         age: user.age,
         sex: user.sex,
+        phone: user.phone ?? "",
         addresses: user.addresses.map((a) => ({
           street: a.street,
           city: a.city,
@@ -58,6 +59,7 @@ export function UserModal({ user, onClose }: UserModalProps) {
     mutationFn: (data: UserFormValues) => {
       const payload = {
         ...data,
+        phone: data.phone || null,
         addresses: data.addresses.map((a) => ({
           ...a,
           state: a.state || null,
@@ -149,6 +151,23 @@ export function UserModal({ user, onClose }: UserModalProps) {
                   </p>
                 )}
               </div>
+            </div>
+
+            {/* Phone */}
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-gray-700">
+                Phone
+              </label>
+              <input
+                {...register("phone")}
+                className={inputClass}
+                placeholder="e.g. +1 234 567 8900"
+              />
+              {errors.phone && (
+                <p className="mt-1 text-xs text-red-500">
+                  {errors.phone.message}
+                </p>
+              )}
             </div>
 
             {/* Addresses */}

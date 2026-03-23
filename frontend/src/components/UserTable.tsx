@@ -57,6 +57,9 @@ export function UserTable({ users, onEdit, onDelete }: UserTableProps) {
               Sex
             </th>
             <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Phone
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
               Addresses
             </th>
             <th className="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
@@ -81,6 +84,9 @@ export function UserTable({ users, onEdit, onDelete }: UserTableProps) {
                 >
                   {user.sex}
                 </span>
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-600">
+                {user.phone ?? <span className="text-gray-400">—</span>}
               </td>
               <td className="px-6 py-4">
                 {user.addresses.length === 0 ? (
