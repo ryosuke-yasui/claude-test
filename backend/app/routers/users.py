@@ -22,9 +22,8 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=schemas.User, status_code=201)
 def create_user(body: schemas.UserCreate, db: Session = Depends(get_db)):
-    user = models.User(name=body.name, age=body.age, sex=body.sex, phone=body.phone)
-    for addr in body.addresses:
-        user.addresses.append(models.Address(**addr.model_dump()))
+    user = models.User(**body.model_dump(exclude={"addresses"}))
+    user.addresses = [models.Address(**addr.model_dump()) for addr in body.addresses]
     db.add(user)
     db.commit()
     db.refresh(user)
@@ -36,12 +35,8 @@ def update_user(user_id: int, body: schemas.UserUpdate, db: Session = Depends(ge
     user = db.get(models.User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    user.name = body.name
-    user.age = body.age
-    user.sex = body.sex
-    user.phone = body.phone
-    for addr in list(user.addresses):
-        db.delete(addr)
+    for field, value in body.model_dump(exclude={"addresses"}).items():
+        setattr(user, field, value)
     user.addresses = [models.Address(**addr.model_dump()) for addr in body.addresses]
     db.commit()
     db.refresh(user)

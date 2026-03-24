@@ -53,7 +53,7 @@ export function UserModal({ user, onClose }: UserModalProps) {
         })),
       });
     }
-  }, [user, reset]);
+  }, [user]); // reset is stable from react-hook-form
 
   const mutation = useMutation({
     mutationFn: (data: UserFormValues) => {

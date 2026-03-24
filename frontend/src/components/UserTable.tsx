@@ -9,6 +9,9 @@ interface UserTableProps {
   onDelete: (user: User) => void;
 }
 
+const thClass =
+  "px-6 py-3 text-xs font-semibold uppercase tracking-wider text-gray-500";
+
 const SEX_BADGE: Record<string, string> = {
   male: "bg-blue-100 text-blue-700",
   female: "bg-pink-100 text-pink-700",
@@ -47,22 +50,22 @@ export function UserTable({ users, onEdit, onDelete }: UserTableProps) {
       <table className="w-full">
         <thead>
           <tr className="border-b border-gray-200 bg-gray-50">
-            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <th className={`${thClass} text-left`}>
               Name
             </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <th className={`${thClass} text-left`}>
               Age
             </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <th className={`${thClass} text-left`}>
               Sex
             </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <th className={`${thClass} text-left`}>
               Phone
             </th>
-            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <th className={`${thClass} text-left`}>
               Addresses
             </th>
-            <th className="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <th className={`${thClass} text-right`}>
               Actions
             </th>
           </tr>
